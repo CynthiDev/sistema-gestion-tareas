@@ -1,0 +1,47 @@
+# Archivos de entorno virtual
+venv/
+.env/
+.venv/
+
+# Archivos de base de datos SQLite
+*.db
+*.sqlite
+*.sqlite3
+
+# Directorio instance de Flask
+instance/
+
+# Archivos de configuración sensible
+config.py
+.secrets
+
+# Archivos generados por Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Archivos de entornos de desarrollo
+.idea/
+.vscode/
+*.code-workspace
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de caché y logs
+.pytest_cache/
+*.log
+
+# Archivos de compilación y distribución
+build/
+dist/
+*.egg-info/
+
+# Archivos de Jupyter Notebook
+*.ipynb
+*.ipynb_checkpoints/
+
+# Archivos de documentación generados
+docs/_build/
