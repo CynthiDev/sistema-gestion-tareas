@@ -2,16 +2,22 @@
 Trabajo práctico de API-REST, autenticacion con protección de contraseñas hasheadas e interacion con Base de Datos SQLite
 
 
-# Sistema de Gestión de Tareas
-
 ## Estructura del proyecto
 ```bash
-src/
-├── client/ # Cliente de consola
-│ └── client.py
-└── server/ # Servidor Flask
-├── server.py
-└── requirements.txt
+sistema-gestion-tareas/
+├── src/
+│   ├── client/
+│       ├── client.py # Cliente de consola
+│   │   └── requirements.txt  
+│   └── server/
+│       ├── server.py  # Servidor Flask
+│       ├── requirements.txt
+│       └── seed.py
+├── docs/
+│   ├── index.html  # GitHub Pages
+│   └── screenshots/
+├── .gitignore
+└── README.md
 ```
 
 ## Instrucciones de ejecución
@@ -63,22 +69,6 @@ Probar con cURL o Postman
 - POST /login: Inicia sesión
 - GET /tareas: Devuelve HTML de bienvenida
 
-#### 4. Respuestas conceptuales:
-
-**¿Por qué hashear contraseñas?**  
-El hashing protege las contraseñas en caso de violación de datos. A diferencia del cifrado, el hash es irreversible. Al usar funciones como bcrypt o PBKDF2:
-- Evitas que contraseñas queden expuestas en texto plano
-- Mitigas el impacto de ataques a la base de datos
-- Cumples con estándares de seguridad básicos
-- Proteges a usuarios que reutilizan contraseñas
-
-**Ventajas de SQLite en este proyecto**:
-1. **Configuración cero**: No requiere servidor separado
-2. **Portabilidad**: Base de datos en un solo archivo
-3. **Requisitos mínimos**: Ideal para proyectos pequeños
-4. **Compatibilidad**: Soporte nativo en Python
-5. **Rendimiento adecuado**: Para cargas de trabajo moderadas
-6. **Facilidad de backup**: Solo copiar el archivo .db
 
 
 
