@@ -150,31 +150,25 @@ python client.py</code></pre>
                                     <h4>Cuerpo de la Petición (Request Body)</h4>
                                     <p>Se debe enviar un objeto JSON con las siguientes claves:</p>
                                     <div class="code-block">
-                                        <pre><code>
-{
+                                        <pre><code>{
     "usuario": "un_nombre_de_usuario",
     "contraseña": "una_clave_fuerte"
-}
-                                        </code></pre>
+}</code></pre>
                                         <button class="copy-btn">Copiar</button>
                                     </div>
                                     <h4>Respuesta Exitosa (201 Created)</h4>
                                     <p>Si el usuario se crea correctamente, el servidor devuelve:</p>
                                     <div class="code-block">
-                                        <pre><code>
-{ 
+                                        <pre><code>{ 
     "mensaje": "Usuario creado exitosamente"
-}
-                                        </code></pre>
+}</code></pre>
                                         <button class="copy-btn">Copiar</button>
                                     </div>
                                     <h4>Ejemplo de Uso (PowerShell)</h4>
                                     <div class="code-block">
-                                        <pre><code>
-curl.exe -X POST http://localhost:5000/registro `
+                                        <pre><code>curl.exe -X POST http://localhost:5000/registro `
 -H "Content-Type: application/json" `
--d '{\"usuario\":\"test\", \"contraseña\":\"123\"}'
-                                    </code></pre>
+-d '{\"usuario\":\"test\", \"contraseña\":\"123\"}'</code></pre>
                                         <button class="copy-btn">Copiar</button>
                                     </div>
                                 </div>
@@ -197,34 +191,28 @@ curl.exe -X POST http://localhost:5000/registro `
                                 <div class="details-content">
                                     <h4>Cuerpo de la Petición (Request Body)</h4>
                                     <div class="code-block">
-                                        <pre><code>
-{ 
+                                        <pre><code>{ 
     "usuario": "usuario_registrado", 
     "contraseña": "su_clave" 
-}
-                                        </code></pre>
+}</code></pre>
                                         <button class="copy-btn">Copiar</button>
                                     </div>
                                     <h4>Respuesta Exitosa (200 OK)</h4>
                                     <p>El servidor devuelve un mensaje de éxito y el ID del usuario. Además, establece una cookie de sesión en el cliente.</p>
                                     <div class="code-block">
-                                        <pre><code>
-{ 
+                                        <pre><code>{ 
     "mensaje": "Inicio de sesión exitoso", 
     "usuario_id": 1 
-}
-                                        </code></pre>
+}</code></pre>
                                         <button class="copy-btn">Copiar</button>
                                     </div>
                                     <h4>Ejemplo de Uso (PowerShell)</h4>
                                     <p>El parámetro <code>-c cookies.txt</code> guarda la cookie de sesión para usarla después.</p>
                                     <div class="code-block">
-                                        <pre><code>
-curl.exe -X POST http://localhost:5000/login `
+                                        <pre><code>curl.exe -X POST http://localhost:5000/login `
 -H "Content-Type: application/json" `
 -d '{\"usuario\":\"test\", \"contraseña\":\"123\"}' `
--c cookies.txt
-                                    </code></pre>
+-c cookies.txt</code></pre>
                                         <button class="copy-btn">Copiar</button>
                                     </div>
                                 </div>
@@ -280,11 +268,9 @@ curl.exe -X POST http://localhost:5000/login `
                                     
                                     <h4>Respuesta Exitosa (200 OK)</h4>
                                     <div class="code-block">
-                                        <pre><code>
- { 
+                                        <pre><code> { 
     "mensaje": "Sesión cerrada exitosamente" 
-}
-                                        </code></pre>
+}</code></pre>
                                         <button class="copy-btn">Copiar</button>
                                     </div>
                                     <h4>Ejemplo de Uso (PowerShell)</h4>
