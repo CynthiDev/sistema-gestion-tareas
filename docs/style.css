@@ -1,0 +1,349 @@
+/* --- PALETA Y CONFIGURACIÓN GLOBAL --- */
+:root {
+    --primary-color: #0d6efd;      /* Azul principal */
+    --secondary-color: #212529;    /* Negro suave para texto */
+    --background-color: #f8f9fa;   /* Fondo general gris claro */
+    --content-bg: #ffffff;         /* Fondo del contenido principal */
+    --border-color: #dee2e6;       /* Bordes sutiles */
+    --code-bg: #f1f3f5;            /* Fondo para código inline */
+    --pre-bg: #212529;             /* Fondo para bloques de código */
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--secondary-color);
+    font-family: var(--font-family);
+    line-height: 1.7;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    grid-template-areas: "sidebar main";
+}
+
+/* --- BARRA LATERAL DE NAVEGACIÓN --- */
+.sidebar {
+    grid-area: sidebar;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    background-color: var(--content-bg);
+    border-right: 1px solid var(--border-color);
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.sidebar h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+}
+
+.sidebar nav ul {
+    list-style: none;
+}
+
+.sidebar nav li {
+    margin-bottom: 0.5rem;
+}
+
+.sidebar nav a {
+    display: block;
+    text-decoration: none;
+    color: #495057;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.sidebar nav a:hover {
+    background-color: #eef2ff;
+}
+
+.sidebar nav a.active {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+}
+
+/* --- CONTENIDO PRINCIPAL --- */
+main {
+    grid-area: main;
+    padding: 3rem 4rem;
+}
+
+section {
+    margin-bottom: 4rem;
+}
+
+h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+p, li {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: #343a40;
+}
+
+ul, ol {
+    padding-left: 25px;
+}
+
+a {
+    color: var(--primary-color);
+    font-weight: 500;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+/* --- COMPONENTES --- */
+.tech-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 1.5rem;
+}
+
+.badge {
+    background: #eef2ff;
+    color: var(--primary-color);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.concept-answer {
+    background-color: var(--code-bg);
+    border-left: 4px solid var(--primary-color);
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    border-radius: 0 4px 4px 0;
+}
+
+code {
+    background-color: var(--code-bg);
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+}
+
+.code-block {
+    position: relative;
+    margin: 1.5rem 0;
+}
+pre {
+    background-color: var(--pre-bg);
+    color: #e9ecef;
+    padding: 20px;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+pre code {
+    background-color: transparent; /* Hereda el fondo oscuro de <pre> */
+    color: inherit;              /* Hereda el color de texto claro de <pre> */
+    padding: 0;                  /* Sin padding extra */
+    border: none;                /* Sin borde extra */
+    font-size: inherit;          /* Asegura el mismo tamaño de fuente */
+    white-space: inherit;        /* Permite que <pre> controle los saltos de línea */
+}
+
+.copy-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #495057;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+.copy-btn:hover { background-color: #6c757d; }
+.copy-btn.copied { background-color: #198754; }
+
+/* --- SECCIÓN DE ENDPOINTS --- */
+.endpoint {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+}
+.endpoint-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: var(--code-bg);
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+.endpoint-method {
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 6px;
+    color: white;
+    font-size: 1rem;
+}
+.method-post { background-color: #198754; }
+.method-get { background-color: #0d6efd; }
+.endpoint-path {
+    font-family: 'Courier New', monospace;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+.endpoint-body {
+    padding: 1.5rem;
+}
+.endpoint-body h4 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    margin-top: 2rem;
+    border-top: 1px solid var(--border-color);
+    color: #6c757d;
+}
+
+
+
+/* --- ESTILOS PARA LA TABLA DE ENDPOINTS INTERACTIVA (VERSIÓN FINAL) --- */
+.api-table-wrapper {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden; /* Para que los bordes redondeados se apliquen bien */
+}
+.api-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.api-table th {
+    background-color: var(--code-bg);
+    text-align: left;
+    padding: 1rem 1.5rem;
+    border-bottom: 2px solid var(--border-color);
+    font-size: 1rem;
+}
+.api-table .summary-row {
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.api-table .summary-row:hover {
+    background-color: #f8f9fa;
+}
+.api-table .summary-row td {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+}
+/* Estilo para el icono que indica que se puede expandir */
+.api-table .expand-col {
+    width: 40px;
+    text-align: center;
+}
+.caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-left: 8px solid #6c757d;
+    transition: transform 0.3s ease;
+}
+.summary-row.open .caret {
+    transform: rotate(90deg);
+}
+/* Fila de detalles que estará oculta */
+.details-row.hidden {
+    display: none;
+}
+.details-row td {
+    padding: 0;
+    background-color: #fdfdff;
+}
+.details-content {
+    padding: 1.5rem 2.5rem;
+    border-top: 1px dashed var(--border-color);
+}
+.details-content h4 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+.details-content pre {
+    margin-top: 0;
+}
+/* Badges de Autenticación */
+.auth-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+.auth-badge.required {
+    background-color: #fff0e6;
+    color: #d9534f;
+    border: 1px solid #d9534f;
+}
+.auth-badge.not-required {
+    background-color: #e6f7ec;
+    color: #5cb85c;
+    border: 1px solid #5cb85c;
+}
+
+
+
+
+
+
+/* --- DISEÑO RESPONSIVE --- */
+@media (max-width: 1024px) {
+    body {
+        grid-template-columns: 1fr;
+        grid-template-areas: "main";
+    }
+    .sidebar {
+        display: none; /* Ocultamos la barra lateral en pantallas pequeñas */
+    }
+    main {
+        padding: 2rem;
+    }
+}

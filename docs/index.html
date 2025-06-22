@@ -1,36 +1,396 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Sistema de Gestión de Tareas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentación API - Sistema de Tareas</title>
+    <!-- Fuente y Hoja de Estilos Externa -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Documentación del Proyecto</h1>
-    
-    <h2>Capturas de pantalla</h2>
-    <img src="screenshots/login.png" alt="Inicio de sesión">
-    <img src="screenshots/tareas.png" alt="Listado de tareas">
-    
-    <h2>Instrucciones de uso</h2>
-    <p>Consulta el <a href="../README.md">README</a> para ejecutar el proyecto</p>
-    
-    <h2>Respuestas conceptuales</h2>
-    <p>¿Por qué hashear contraseñas? </p>
-    <p>El hashing protege las contraseñas en caso de violación de datos. A diferencia del cifrado, el hash es irreversible. Al usar funciones como bcrypt o PBKDF2:
-- Evitas que contraseñas queden expuestas en texto plano
-- Mitigas el impacto de ataques a la base de datos
-- Cumples con estándares de seguridad básicos
-- Proteges a usuarios que reutilizan contraseñas
-</p>
+
+    <aside class="sidebar">
+        <h2>Navegación</h2>
+        <nav>
+            <ul>
+                <li><a href="#overview" class="active">Descripción General</a></li>
+                <li><a href="#tech-stack">Tecnologías</a></li>
+                <li><a href="#execution">Puesta en Marcha</a></li>
+                <li><a href="#demo">Pruebas y Demostración</a></li>
+                <li><a href="#api-endpoints">Endpoints de la API</a></li>
+                <li><a href="#conceptual-keys">Conceptos Clave</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main>
+        <header>
+            <h1>Documentación de la API</h1>
+            <p class="subtitle">Sistema de Gestión de Tareas</p>
+        </header>
+
+        <section id="overview">
+            <h2>Descripción General</h2>
+            <p>
+                Esta documentación detalla la API RESTful para el Sistema de Gestión de Tareas. El proyecto consiste en un backend en <strong>Flask</strong> que gestiona usuarios y tareas, y un cliente de consola en <strong>Python</strong> para interactuar con él. La autenticación se maneja de forma segura a través de sesiones con cookies, y los datos persisten en una base de datos <strong>SQLite</strong>.
+            </p>
+        </section>
+
+        <section id="tech-stack">
+            <h2>Tecnologías Utilizadas</h2>
+            <p>El proyecto se basa en un conjunto de tecnologías robustas y ampliamente utilizadas en el ecosistema de Python:</p>
+            <div class="tech-badges">
+                <span class="badge">Python 3.10+</span>
+                <span class="badge">Flask</span>
+                <span class="badge">SQLAlchemy</span>
+                <span class="badge">SQLite</span>
+                <span class="badge">Werkzeug Security</span>
+                <span class="badge">Requests</span>
+                <span class="badge">REST API</span>
+            </div>
+        </section>
+
+      <section id="execution">
+            <h2>Puesta en Marcha</h2>
+            <p>Sigue estos pasos para configurar y ejecutar el proyecto en tu entorno local.</p>
+
+            <h3>1. Clona el repositorio</h3>
+            <div class="code-block">
+                <pre><code>git clone https://github.com/cynthidev/sistema-gestion-tareas.git
+cd sistema-gestion-tareas</code></pre>
+                <button class="copy-btn">Copiar</button>
+            </div>
+            
+            <h3>2. Configura y ejecuta el Servidor</h3>
+            <p>Abre una terminal para el servidor:</p>
+            <div class="code-block">
+                <pre><code># 1. Navega al directorio del servidor
+cd src/server
+
+# 2. Instala las dependencias
+pip install -r requirements.txt
+
+# 3. Inicia el servidor Flask
+# La API estará disponible en http://localhost:5000
+python server.py</code></pre>
+                <button class="copy-btn">Copiar</button>
+            </div>
+
+            <h3>3. Configura y ejecuta el Cliente</h3>
+            <p>Abre una <strong>nueva terminal</strong> (deja la del servidor corriendo):</p>
+            <div class="code-block">
+                <pre><code># 1. Navega al directorio del cliente (desde la raíz del proyecto)
+cd src/client
+
+# 2. Instala las dependencias (si es necesario)
+pip install -r requirements.txt
+
+# 3. Inicia el cliente interactivo
+python client.py</code></pre>
+                <button class="copy-btn">Copiar</button>
+            </div>
+        </section>
+
+        <section id="demo">
+            <h2>Pruebas y Demostración</h2>
+            <p>A continuación se muestra el flujo de uso del cliente de consola. Para tus propias pruebas, reemplaza las imágenes de ejemplo en la carpeta <code>docs/screenshots/</code>.</p>
+            
+            <div class="concept-answer">
+                <h4>1. Registro de un nuevo usuario</h4>
+                <p>El primer paso es crear una cuenta en el sistema.</p>
+                <img src="https://placehold.co/800x200/212529/e9ecef?text=Captura+de+Registro" alt="Captura de pantalla del registro" style="width:100%; border-radius: 4px;">
+            </div>
+
+            <div class="concept-answer">
+                <h4>2. Inicio de sesión</h4>
+                <p>Una vez registrado, el usuario puede iniciar sesión para obtener una sesión autenticada.</p>
+                <img src="https://placehold.co/800x200/212529/e9ecef?text=Captura+de+Login" alt="Captura de pantalla del inicio de sesión" style="width:100%; border-radius: 4px;">
+            </div>
+
+            <div class="concept-answer">
+                <h4>3. Ver las tareas</h4>
+                <p>Con una sesión activa, el usuario puede solicitar y ver sus tareas personales.</p>
+                <img src="https://placehold.co/800x300/212529/e9ecef?text=Captura+de+Tareas" alt="Captura de pantalla de la visualización de tareas" style="width:100%; border-radius: 4px;">
+            </div>
+        </section>
+
+        
+        
+        <section id="api-endpoints">
+            <h2>Endpoints de la API</h2>
+            <p>La siguiente tabla resume los endpoints disponibles. <strong>Haz clic en una fila</strong> para ver los detalles completos, incluyendo el formato de los datos y ejemplos de uso.</p>
+            
+            <div class="api-table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th>Método y Ruta</th>
+                            <th>Descripción Breve</th>
+                            <th>Autenticación</th>
+                            <th class="expand-col">Ver</th>
+                        </tr>
+                    </thead>
+                    <!-- Endpoint: /registro -->
+                    <tbody>
+                        <tr class="summary-row">
+                            <td>
+                                <span class="endpoint-method method-post">POST</span>
+                                <code>/registro</code>
+                            </td>
+                            <td>Crea un nuevo usuario.</td>
+                            <td><span class="auth-badge not-required">No Requerida</span></td>
+                            <td><span class="caret"></span></td>
+                        </tr>
+                        <tr class="details-row hidden">
+                            <td colspan="4">
+                                <div class="details-content">
+                                    <h4>Cuerpo de la Petición (Request Body)</h4>
+                                    <p>Se debe enviar un objeto JSON con las siguientes claves:</p>
+                                    <div class="code-block">
+                                        <pre><code>
+{
+    "usuario": "un_nombre_de_usuario",
+    "contraseña": "una_clave_fuerte"
+}
+                                        </code></pre>
+                                        <button class="copy-btn">Copiar</button>
+                                    </div>
+                                    <h4>Respuesta Exitosa (201 Created)</h4>
+                                    <p>Si el usuario se crea correctamente, el servidor devuelve:</p>
+                                    <div class="code-block">
+                                        <pre><code>
+{ 
+    "mensaje": "Usuario creado exitosamente"
+}
+                                        </code></pre>
+                                        <button class="copy-btn">Copiar</button>
+                                    </div>
+                                    <h4>Ejemplo de Uso (PowerShell)</h4>
+                                    <div class="code-block">
+                                        <pre><code>
+curl.exe -X POST http://localhost:5000/registro `
+-H "Content-Type: application/json" `
+-d '{\"usuario\":\"test\", \"contraseña\":\"123\"}'
+                                    </code></pre>
+                                        <button class="copy-btn">Copiar</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <!-- Endpoint: /login -->
+                    <tbody>
+                        <tr class="summary-row">
+                            <td>
+                                <span class="endpoint-method method-post">POST</span>
+                                <code>/login</code>
+                            </td>
+                            <td>Autentica a un usuario.</td>
+                            <td><span class="auth-badge not-required">No Requerida</span></td>
+                            <td><span class="caret"></span></td>
+                        </tr>
+                        <tr class="details-row hidden">
+                            <td colspan="4">
+                                <div class="details-content">
+                                    <h4>Cuerpo de la Petición (Request Body)</h4>
+                                    <div class="code-block">
+                                        <pre><code>
+{ 
+    "usuario": "usuario_registrado", 
+    "contraseña": "su_clave" 
+}
+                                        </code></pre>
+                                        <button class="copy-btn">Copiar</button>
+                                    </div>
+                                    <h4>Respuesta Exitosa (200 OK)</h4>
+                                    <p>El servidor devuelve un mensaje de éxito y el ID del usuario. Además, establece una cookie de sesión en el cliente.</p>
+                                    <div class="code-block">
+                                        <pre><code>
+{ 
+    "mensaje": "Inicio de sesión exitoso", 
+    "usuario_id": 1 
+}
+                                        </code></pre>
+                                        <button class="copy-btn">Copiar</button>
+                                    </div>
+                                    <h4>Ejemplo de Uso (PowerShell)</h4>
+                                    <p>El parámetro <code>-c cookies.txt</code> guarda la cookie de sesión para usarla después.</p>
+                                    <div class="code-block">
+                                        <pre><code>
+curl.exe -X POST http://localhost:5000/login `
+-H "Content-Type: application/json" `
+-d '{\"usuario\":\"test\", \"contraseña\":\"123\"}' `
+-c cookies.txt
+                                    </code></pre>
+                                        <button class="copy-btn">Copiar</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <!-- Endpoint: /tareas -->
+                    <tbody>
+                        <tr class="summary-row">
+                            <td>
+                                <span class="endpoint-method method-get">GET</span>
+                                <code>/tareas</code>
+                            </td>
+                            <td>Obtiene las tareas del usuario.</td>
+                            <td><span class="auth-badge required">Requerida</span></td>
+                            <td><span class="caret"></span></td>
+                        </tr>
+                        <tr class="details-row hidden">
+                            <td colspan="4">
+                                <div class="details-content">
+                                    <h4>Cuerpo de la Petición (Request Body)</h4>
+                                    <p>No se requiere cuerpo para esta petición GET.</p>
+                                    
+                                    <h4>Respuesta Exitosa (200 OK)</h4>
+                                    <p>Devuelve un documento <strong>HTML</strong> con la lista de tareas del usuario.</p>
+
+                                    <h4>Ejemplo de Uso (PowerShell)</h4>
+                                    <p>El parámetro <code>-b cookies.txt</code> envía la cookie guardada para autenticar la petición.</p>
+                                    <div class="code-block">
+                                        <pre><code>curl.exe -X GET http://localhost:5000/tareas -b cookies.txt</code></pre>
+                                        <button class="copy-btn">Copiar</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <!-- Endpoint: /logout -->
+                    <tbody>
+                        <tr class="summary-row">
+                             <td>
+                                <span class="endpoint-method method-post">POST</span>
+                                <code>/logout</code>
+                            </td>
+                            <td>Cierra la sesión del usuario.</td>
+                            <td><span class="auth-badge required">Requerida</span></td>
+                            <td><span class="caret"></span></td>
+                        </tr>
+                        <tr class="details-row hidden">
+                            <td colspan="4">
+                                <div class="details-content">
+                                    <h4>Cuerpo de la Petición (Request Body)</h4>
+                                    <p>No se requiere cuerpo para esta petición POST.</p>
+                                    
+                                    <h4>Respuesta Exitosa (200 OK)</h4>
+                                    <div class="code-block">
+                                        <pre><code>
+ { 
+    "mensaje": "Sesión cerrada exitosamente" 
+}
+                                        </code></pre>
+                                        <button class="copy-btn">Copiar</button>
+                                    </div>
+                                    <h4>Ejemplo de Uso (PowerShell)</h4>
+                                    <p>Requiere la cookie de sesión para saber qué sesión debe cerrar.</p>
+                                    <div class="code-block">
+                                        <pre><code>curl.exe -X POST http://localhost:5000/logout -b cookies.txt</code></pre>
+                                        <button class="copy-btn">Copiar</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
 
 
-    <p>Ventajas de SQLite en este proyecto: </p>
-    <p>1. **Configuración cero**: No requiere servidor separado
-2. **Portabilidad**: Base de datos en un solo archivo
-3. **Requisitos mínimos**: Ideal para proyectos pequeños
-4. **Compatibilidad**: Soporte nativo en Python
-5. **Rendimiento adecuado**: Para cargas de trabajo moderadas
-6. **Facilidad de backup**: Solo copiar el archivo .db</p>
+        <section id="conceptual-keys">
+            <h2>Conceptos Clave</h2>
+            
+            <div class="concept-answer">
+                <h3>¿Por qué es crucial hashear las contraseñas?</h3>
+                <p>
+                    El hashing de contraseñas es una práctica de seguridad no negociable. En lugar de almacenar las contraseñas en texto plano, se transforman en una cadena de caracteres única e irreversible. Esto significa que si la base de datos se ve comprometida, los atacantes no pueden obtener las contraseñas originales de los usuarios. En este proyecto, usamos <strong>Werkzeug</strong>, que implementa `pbkdf2:sha256`, un algoritmo fuerte que incluye "salting" para proteger contra ataques comunes.
+                </p>
+                <p>
+                    Las razones fundamentales para hashear contraseñas son:
+                </p>
+                <ul>
+                    <li><strong>Protección de datos:</strong> Es la primera línea de defensa para proteger la información del usuario en caso de una brecha de seguridad.</li>
+                    <li><strong>Irreversibilidad:</strong> A diferencia del cifrado, un buen hash no se puede "deshacer" para revelar la contraseña original.</li>
+                    <li><strong>Cumplimiento de estándares:</strong> Es un requisito básico en la mayoría de las políticas de seguridad de datos.</li>
+                    <li><strong>Mitigación de riesgos:</strong> Reduce el impacto si los usuarios reutilizan la misma contraseña en múltiples servicios.</li>
+                </ul>
+            </div>
 
+            <div class="concept-answer">
+                <h3>¿Cuáles son las ventajas de SQLite?</h3>
+                <p>
+                    Para este proyecto, se eligió SQLite por su pragmatismo y eficiencia, ofreciendo un conjunto de ventajas clave para el desarrollo y despliegues a pequeña escala:
+                </p>
+                <ul>
+                    <li><strong>Configuración Cero:</strong> No requiere un proceso de servidor de base de datos separado, lo que simplifica enormemente la instalación y el despliegue.</li>
+                    <li><strong>Autocontenida:</strong> Toda la base de datos (tablas, índices y datos) reside en un único archivo en el disco, facilitando su portabilidad y copias de seguridad.</li>
+                    <li><strong>Ligereza y Compatibilidad:</strong> Tiene requisitos mínimos de sistema y viene integrado en la librería estándar de Python, sin necesidad de instalar drivers adicionales.</li>
+                    <li><strong>Rendimiento Adecuado:</strong> Es sorprendentemente rápido para la mayoría de las operaciones comunes en aplicaciones con tráfico bajo a moderado.</li>
+                </ul>
+                <p>
+                    Estas características lo convierten en la opción ideal para prototipos, aplicaciones de escritorio o pequeños servicios web donde la complejidad de un sistema como PostgreSQL o MySQL no es necesaria.
+                </p>
+            </div>
+        </section>
 
+        <footer>
+            <p>Documentación creada por Cynthia Estefania Choque Galindo - 2025</p>
+            <p><a href="https://github.com/cynthidev/sistema-gestion-tareas">Ver el proyecto en GitHub</a></p>
+        </footer>
+    </main>
+
+    <script>
+        // --- SCRIPT PARA BOTÓN DE COPIAR ---
+        document.querySelectorAll('.copy-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const pre = button.parentElement.querySelector('pre');
+                navigator.clipboard.writeText(pre.innerText).then(() => {
+                    button.innerText = '¡Copiado!';
+                    button.classList.add('copied');
+                    setTimeout(() => {
+                        button.innerText = 'Copiar';
+                        button.classList.remove('copied');
+                    }, 2000);
+                });
+            });
+        });
+
+        // --- SCRIPT PARA NAVEGACIÓN ACTIVA AL HACER SCROLL ---
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.sidebar nav a');
+
+        const activateLink = (id) => {
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${id}`) {
+                    link.classList.add('active');
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    activateLink(entry.target.id);
+                }
+            });
+        }, { rootMargin: "-30% 0px -70% 0px" });
+
+        sections.forEach(section => observer.observe(section));
+        
+        // --- SCRIPT PARA LA TABLA INTERACTIVA DE ENDPOINTS ---
+        document.querySelectorAll('.api-table .summary-row').forEach(row => {
+            row.addEventListener('click', () => {
+                row.classList.toggle('open');
+                const detailsRow = row.nextElementSibling;
+                detailsRow.classList.toggle('hidden');
+            });
+        });
+    </script>
 </body>
 </html>

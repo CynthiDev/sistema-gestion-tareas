@@ -45,3 +45,8 @@ dist/
 
 # Archivos de documentación generados
 docs/_build/
+
+# Archivos temporales de pruebas
+cookies.txt
+*.cookies
+session.txt
