@@ -1,5 +1,6 @@
-# sistema-gestion-tareas
+# Sistema de Gestión de Tareas
 Trabajo práctico de API-REST, autenticacion con protección de contraseñas hasheadas e interacion con Base de Datos SQLite
+
 
 
 ## Estructura del proyecto
@@ -52,7 +53,7 @@ pip install -r requirements.txt
 python client.py
 ```
 
-### Shorcuts
+### Si ya  instaló las dependencias:
 1. Inicia el servidor: `python src/server/server.py`
 2. Inicia el cliente: `python src/client/client.py`
 3. Sigue las instrucciones en el cliente
