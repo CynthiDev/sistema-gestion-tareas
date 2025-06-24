@@ -161,7 +161,7 @@ code {
 
 .code-block {
     position: relative;
-    margin: 1.5rem 0;
+    margin: 0;
 }
 pre {
     background-color: var(--pre-bg);
@@ -170,14 +170,14 @@ pre {
     border-radius: 6px;
     overflow-x: auto;
     font-size: 0.95rem;
-    line-height: 1.5;
+    line-height: 1;
 }
 pre code {
     background-color: transparent; /* Hereda el fondo oscuro de <pre> */
     color: inherit;              /* Hereda el color de texto claro de <pre> */
     padding: 0;                  /* Sin padding extra */
     border: none;                /* Sin borde extra */
-    font-size: inherit;          /* Asegura el mismo tamaño de fuente */
+    font-size: 0.9rem;          /* Asegura el mismo tamaño de fuente */
     white-space: inherit;        /* Permite que <pre> controle los saltos de línea */
 }
 

@@ -70,7 +70,7 @@ cd sistema-gestion-tareas</code></pre>
                 <pre><code># 1. Navega al directorio del servidor
 cd src/server
 
-# 2. Instala las dependencias
+# 2. Instala las dependencias (solo la primera vez)
 pip install -r requirements.txt
 
 # 3. Inicia el servidor Flask
@@ -85,7 +85,7 @@ python server.py</code></pre>
                 <pre><code># 1. Navega al directorio del cliente (desde la raíz del proyecto)
 cd src/client
 
-# 2. Instala las dependencias (si es necesario)
+# 2. Instala las dependencias (solo la primera vez)
 pip install -r requirements.txt
 
 # 3. Inicia el cliente interactivo
@@ -101,19 +101,31 @@ python client.py</code></pre>
             <div class="concept-answer">
                 <h4>1. Registro de un nuevo usuario</h4>
                 <p>El primer paso es crear una cuenta en el sistema.</p>
-                <img src="https://placehold.co/800x200/212529/e9ecef?text=Captura+de+Registro" alt="Captura de pantalla del registro" style="width:100%; border-radius: 4px;">
+                <img src="../docs/screenshots/registro.png" alt="Captura de pantalla del registro" style="width:100%; border-radius: 4px;">
             </div>
 
             <div class="concept-answer">
                 <h4>2. Inicio de sesión</h4>
-                <p>Una vez registrado, el usuario puede iniciar sesión para obtener una sesión autenticada.</p>
-                <img src="https://placehold.co/800x200/212529/e9ecef?text=Captura+de+Login" alt="Captura de pantalla del inicio de sesión" style="width:100%; border-radius: 4px;">
+                <p>Una vez registrado, el usuario puede iniciar sesión para obtener una sesión autenticada. 
+                    <br>Se muetra log de depuración (a fines de evidencia) para confirmar que la sesión está activa</p>
+                <img src="../docs/screenshots/login.png" alt="Captura de pantalla del inicio de sesión" style="width:100%; border-radius: 4px;">
             </div>
 
             <div class="concept-answer">
-                <h4>3. Ver las tareas</h4>
-                <p>Con una sesión activa, el usuario puede solicitar y ver sus tareas personales.</p>
-                <img src="https://placehold.co/800x300/212529/e9ecef?text=Captura+de+Tareas" alt="Captura de pantalla de la visualización de tareas" style="width:100%; border-radius: 4px;">
+                <h4>3. Crear y ver las tareas</h4>
+                <p>Con una sesión activa (el usuario debe de estar logeado), puede solicitar y ver sus tareas personales.
+                    <br>Si el usuario no tiene tareas, puede crear una nueva tarea y luego consultarla. </p>
+                <img src="../docs/screenshots/tareas.png" alt="Captura de pantalla de la visualización de tareas" style="width:100%; border-radius: 4px;">
+            </div>
+            <div class="concept-answer">
+                <h4>4. Cerrar sessión</h4>
+                <p>Con una sesión activa (el usuario debe de estar logeado), puede cerrar sesión.
+                <img src="../docs/screenshots/logout.png" alt="Captura de pantalla de la visualización de salida de seción" style="width:100%; border-radius: 4px;">
+            </div>
+            <div class="concept-answer">
+                <h4>5. Salir</h4>
+                <p>El usuario puede salir desde el menú principal. Si el usuario sale,  y no cerró sesión  la sesión se cierra automáticamente </p>
+                <img src="../docs/screenshots/salir.png" alt="Captura de pantalla de la visualización de salida de seción" style="width:100%; border-radius: 4px;">
             </div>
         </section>
 
@@ -140,7 +152,7 @@ python client.py</code></pre>
                                 <span class="endpoint-method method-post">POST</span>
                                 <code>/registro</code>
                             </td>
-                            <td>Crea un nuevo usuario.</td>
+                            <td>Crea un nuevo usuario en el sistema.</td>
                             <td><span class="auth-badge not-required">No Requerida</span></td>
                             <td><span class="caret"></span></td>
                         </tr>
@@ -148,29 +160,46 @@ python client.py</code></pre>
                             <td colspan="4">
                                 <div class="details-content">
                                     <h4>Cuerpo de la Petición (Request Body)</h4>
-                                    <p>Se debe enviar un objeto JSON con las siguientes claves:</p>
+                                    <p>Se requiere un cuerpo en formato <strong>JSON</strong> con los siguientes campos:</p>
+                                    <ul>
+                                        <li><code>usuario</code> (string, <strong>requerido</strong>): El nombre de usuario único.</li>
+                                        <li><code>contrasenia</code> (string, <strong>requerido</strong>): La contraseña para el nuevo usuario.</li>
+                                    </ul>
+                                    <p><strong>Ejemplo de JSON:</strong></p>
                                     <div class="code-block">
                                         <pre><code>{
-    "usuario": "un_nombre_de_usuario",
-    "contraseña": "una_clave_fuerte"
+    "usuario": "nuevo_usuario_01",
+    "contrasenia": "unaClaveSegura123!"
 }</code></pre>
                                         <button class="copy-btn">Copiar</button>
                                     </div>
                                     <h4>Respuesta Exitosa (201 Created)</h4>
-                                    <p>Si el usuario se crea correctamente, el servidor devuelve:</p>
+                                    <p>Si el usuario se crea correctamente, la API devuelve un código <code>201 Created</code> y un mensaje de confirmación.</p>
                                     <div class="code-block">
-                                        <pre><code>{ 
+                                        <pre><code>{
     "mensaje": "Usuario creado exitosamente"
 }</code></pre>
                                         <button class="copy-btn">Copiar</button>
                                     </div>
+                                    <h4>Respuestas de Error</h4>
+                                    <ul>
+                                        <li><strong>400 Bad Request:</strong> Se devuelve si el campo <code>usuario</code> o <code>contrasenia</code> están ausentes.
+                                            <pre><code>{"error": "Faltan datos"}</code></pre>
+                                        </li>
+                                        <li><strong>400 Bad Request:</strong> Se devuelve si el nombre de usuario ya está registrado.
+                                            <pre><code>{"error": "Usuario ya existe"}</code></pre>
+                                        </li>
+                                    </ul>
+                                    
+
                                     <h4>Ejemplo de Uso (PowerShell)</h4>
                                     <div class="code-block">
                                         <pre><code>curl.exe -X POST http://localhost:5000/registro `
 -H "Content-Type: application/json" `
--d '{\"usuario\":\"test\", \"contraseña\":\"123\"}'</code></pre>
+-d '{\"usuario\":\"test\", \"contrasenia\":\"123\"}'</code></pre>
                                         <button class="copy-btn">Copiar</button>
                                     </div>
+                                    
                                 </div>
                             </td>
                         </tr>
@@ -182,7 +211,7 @@ python client.py</code></pre>
                                 <span class="endpoint-method method-post">POST</span>
                                 <code>/login</code>
                             </td>
-                            <td>Autentica a un usuario.</td>
+                            <td>Autentica a un usuario y crea una sesión.</td>
                             <td><span class="auth-badge not-required">No Requerida</span></td>
                             <td><span class="caret"></span></td>
                         </tr>
@@ -190,28 +219,44 @@ python client.py</code></pre>
                             <td colspan="4">
                                 <div class="details-content">
                                     <h4>Cuerpo de la Petición (Request Body)</h4>
+                                    <p>Se requiere un cuerpo en formato <strong>JSON</strong> con las credenciales del usuario:</p>
+                                    <ul>
+                                        <li><code>usuario</code> (string, <strong>requerido</strong>): El nombre de usuario registrado.</li>
+                                        <li><code>contrasenia</code> (string, <strong>requerido</strong>): La contraseña del usuario.</li>
+                                    </ul>
+                                    <p><strong>Ejemplo de JSON:</strong></p>
                                     <div class="code-block">
-                                        <pre><code>{ 
-    "usuario": "usuario_registrado", 
-    "contraseña": "su_clave" 
+                                        <pre><code>{
+    "usuario": "test_user",
+    "contrasenia": "password123"
 }</code></pre>
                                         <button class="copy-btn">Copiar</button>
                                     </div>
                                     <h4>Respuesta Exitosa (200 OK)</h4>
-                                    <p>El servidor devuelve un mensaje de éxito y el ID del usuario. Además, establece una cookie de sesión en el cliente.</p>
+                                    <p>Si las credenciales son correctas, el servidor devuelve un mensaje de éxito y el ID del usuario. Crucialmente, también <strong>establece una cookie de sesión</strong> en el navegador del cliente para autenticar las siguientes peticiones.</p>
                                     <div class="code-block">
-                                        <pre><code>{ 
-    "mensaje": "Inicio de sesión exitoso", 
-    "usuario_id": 1 
+                                        <pre><code>{
+    "mensaje": "Inicio de sesión exitoso",
+    "usuario_id": 42
 }</code></pre>
                                         <button class="copy-btn">Copiar</button>
                                     </div>
+
+                                    <h4>Respuestas de Error</h4>
+                                    <ul>
+                                        <li><strong>401 Unauthorized:</strong> Se devuelve si el usuario no existe o si la contraseña es incorrecta.
+                                            <pre><code>{"error": "Credenciales inválidas"}</code></pre>
+                                        </li>
+                                    </ul>
+
+
+
                                     <h4>Ejemplo de Uso (PowerShell)</h4>
-                                    <p>El parámetro <code>-c cookies.txt</code> guarda la cookie de sesión para usarla después.</p>
+                                    <p>El parámetro <code>-c cookies.txt</code> guarda la cookie de sesión recibida del servidor en un archivo llamado <code>cookies.txt</code>. Este archivo se puede usar después con <code>-b cookies.txt</code> para hacer peticiones autenticadas.</p>
                                     <div class="code-block">
                                         <pre><code>curl.exe -X POST http://localhost:5000/login `
 -H "Content-Type: application/json" `
--d '{\"usuario\":\"test\", \"contraseña\":\"123\"}' `
+-d '{\"usuario\":\"test\", \"contrasenia\":\"123\"}' `
 -c cookies.txt</code></pre>
                                         <button class="copy-btn">Copiar</button>
                                     </div>
@@ -219,7 +264,7 @@ python client.py</code></pre>
                             </td>
                         </tr>
                     </tbody>
-                    <!-- Endpoint: /tareas -->
+                    <!-- Endpoint: /tareas GET -->
                     <tbody>
                         <tr class="summary-row">
                             <td>
@@ -243,6 +288,54 @@ python client.py</code></pre>
                                     <p>El parámetro <code>-b cookies.txt</code> envía la cookie guardada para autenticar la petición.</p>
                                     <div class="code-block">
                                         <pre><code>curl.exe -X GET http://localhost:5000/tareas -b cookies.txt</code></pre>
+                                        <button class="copy-btn">Copiar</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <!-- Endpoint: /tareas POST -->
+                    <tbody>
+                        <tr class="summary-row">
+                            <td>
+                                <span class="endpoint-method method-post">POST</span>
+                                <code>/tareas</code>
+                            </td>
+                            <td>Crea una nueva tarea para el usuario autenticado.</td>
+                            <td><span class="auth-badge required">Requerida</span></td>
+                            <td><span class="caret"></span></td>
+                        </tr>
+                        <tr class="details-row hidden">
+                            <td colspan="4">
+                                <div class="details-content">
+                                    <h4>Cuerpo de la Petición (Request Body)</h4>
+                                    <ul>
+                                        <li><code>titulo</code> (string, <strong>requerido</strong>): El título de la nueva tarea.</li>
+                                        <li><code>descripcion</code> (string, <em>opcional</em>): Una descripción más detallada de la tarea.</li>
+                                    </ul>
+                                    <div class="code-block">
+                                        <pre><code>{
+    "titulo": "Estudiar para el examen de API",
+    "descripcion": "Repasar los conceptos de REST, verbos HTTP y códigos de estado."
+}</code></pre>
+                                        <button class="copy-btn">Copiar</button>
+                                    </div>
+                                    <h4>Respuesta Exitosa (200 OK)</h4>
+                                    <p>El servidor devuelve un mensaje de éxito y el ID del usuario. Además, establece una cookie de sesión en el cliente.</p>
+                                    <div class="code-block">
+                                        <pre><code>{ 
+    "mensaje": "Inicio de sesión exitoso", 
+    "usuario_id": 1 
+}</code></pre>
+                                        <button class="copy-btn">Copiar</button>
+                                    </div>
+                                    <h4>Ejemplo de Uso (PowerShell)</h4>
+                                    <p>El parámetro <code>-c cookies.txt</code> guarda la cookie de sesión para usarla después.</p>
+                                    <div class="code-block">
+                                        <pre><code>curl.exe -X POST http://localhost:5000/login `
+-H "Content-Type: application/json" `
+-d '{\"usuario\":\"test\", \"contrasenia\":\"123\"}' `
+-c cookies.txt</code></pre>
                                         <button class="copy-btn">Copiar</button>
                                     </div>
                                 </div>
@@ -304,6 +397,8 @@ python client.py</code></pre>
                     <li><strong>Irreversibilidad:</strong> A diferencia del cifrado, un buen hash no se puede "deshacer" para revelar la contraseña original.</li>
                     <li><strong>Cumplimiento de estándares:</strong> Es un requisito básico en la mayoría de las políticas de seguridad de datos.</li>
                     <li><strong>Mitigación de riesgos:</strong> Reduce el impacto si los usuarios reutilizan la misma contraseña en múltiples servicios.</li>
+                    <li><strong>Ataques de Tablas Arcoíris (Rainbow Tables):</strong> Una "sal" (salt) es una cadena de caracteres aleatoria que se añade a cada contraseña antes de hashearla. Como cada usuario tiene una "sal" diferente, dos usuarios con la misma contraseña (ej: "123456") tendrán hashes completamente distintos. Esto hace inútiles las tablas precalculadas de hashes (rainbow tables), que son una forma común de ataque.</li>
+                    <li><strong>Ataques de Diccionario:</strong> El "salting" y el uso de algoritmos lentos como pbkdf2 o bcrypt hacen que probar millones de contraseñas de un diccionario sea computacionalmente muy costoso y lento, desincentivando al atacante.</li>
                 </ul>
             </div>
 

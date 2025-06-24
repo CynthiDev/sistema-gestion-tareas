@@ -31,19 +31,19 @@ def main():
 
                 if opcion == "1":
                     usuario = input("Usuario: ")
-                    contraseña = getpass.getpass("Contraseña: ")
-                    respuesta = session.post(f"{BASE_URL}/registro", json={"usuario": usuario, "contraseña": contraseña})
+                    contrasenia = getpass.getpass("Contraseña: ")
+                    respuesta = session.post(f"{BASE_URL}/registro", json={"usuario": usuario, "contrasenia": contrasenia})
                     resultado = respuesta.json()
                     print(resultado.get('mensaje') or resultado.get('error'))
                             
 
                 elif opcion == "2":
                     usuario = input("Usuario: ")
-                    contraseña = getpass.getpass("Contraseña: ")
+                    contrasenia = getpass.getpass("Contraseña: ")
                     # Limpiar sesión previa
                     session.cookies.clear()  
 
-                    respuesta = session.post(f"{BASE_URL}/login", json={"usuario": usuario, "contraseña": contraseña})
+                    respuesta = session.post(f"{BASE_URL}/login", json={"usuario": usuario, "contrasenia": contrasenia})
                     resultado = respuesta.json()
                     print(resultado.get('mensaje') or resultado.get('error'))
                     mostrar_cookies()  # Verifica las cookies después de login

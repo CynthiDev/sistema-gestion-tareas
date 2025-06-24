@@ -18,7 +18,7 @@ db = SQLAlchemy(app)
 class Usuario(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     usuario = db.Column(db.String(50), unique=True, nullable=False)
-    contraseña = db.Column(db.String(100), nullable=False)
+    contrasenia = db.Column(db.String(100), nullable=False)
 
 class Tarea(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -38,16 +38,16 @@ from seed import crear_datos_iniciales
 def registro():
     datos = request.get_json()
     usuario = datos.get('usuario')
-    contraseña = datos.get('contraseña')
+    contrasenia = datos.get('contrasenia')
     
-    if not usuario or not contraseña:
+    if not usuario or not contrasenia:
         return jsonify({'error': 'Faltan datos'}), 400
     
     if Usuario.query.filter_by(usuario=usuario).first():
         return jsonify({'error': 'Usuario ya existe'}), 400
     
-    hashed_pw = generate_password_hash(contraseña)
-    nuevo_usuario = Usuario(usuario=usuario, contraseña=hashed_pw)
+    hashed_pw = generate_password_hash(contrasenia)
+    nuevo_usuario = Usuario(usuario=usuario, contrasenia=hashed_pw)
     db.session.add(nuevo_usuario)
     db.session.commit()
     
@@ -61,14 +61,14 @@ def registro():
 def login():
     datos = request.get_json()
     usuario = datos.get('usuario')
-    contraseña = datos.get('contraseña')
+    contrasenia = datos.get('contrasenia')
     
     usuario_existente = Usuario.query.filter_by(usuario=usuario).first()
     
-    if not usuario_existente or not check_password_hash(usuario_existente.contraseña, contraseña):
+    if not usuario_existente or not check_password_hash(usuario_existente.contrasenia, contrasenia):
         return jsonify({'error': 'Credenciales inválidas'}), 401
     
-    # ESTABLECER SESIÓN - PARTE CLAVE
+    # ESTABLECER SESIÓN
     session['usuario_id'] = usuario_existente.id
     
     return jsonify({
@@ -88,7 +88,7 @@ def logout():
 
 @app.route('/tareas', methods=['GET'])
 def obtener_tareas():
-    # Verificar si el usuario ha iniciado sesión, La verificación depende de la firma
+    # Validacion  si el usuario ha iniciado sesión, depende de la firma
     if 'usuario_id' not in session:
         print("Acceso no autorizado: sesión no encontrada")
         return jsonify({'error': 'Acceso no autorizado'}), 401
@@ -116,7 +116,7 @@ def obtener_tareas():
     '''
 
     if not tareas:
-        html += '<li>No tienes tareas registradas</li>'
+        html += '<li>No tenés tareas registradas</li>'
     else:
         for tarea in tareas:
             html += f'<li><strong>{tarea.titulo}</strong>: {tarea.descripcion}</li>'        
@@ -167,7 +167,7 @@ def crear_tarea():
 # Crear tablas al inicio
 with app.app_context():
     db.create_all()
-    crear_datos_iniciales(db, Usuario, Tarea)  # Pasar los modelos como argumentos
+    crear_datos_iniciales(db, Usuario, Tarea) 
 
 
 
