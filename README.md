@@ -95,7 +95,7 @@ sistema-gestion-tareas/
 
 
 
-## 👨‍💻 Autor
+## Autora
 
 *   **Cynthia Estefania Choque Galindo** - [cynthidev](https://github.com/cynthidev)
 
