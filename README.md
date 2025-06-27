@@ -7,7 +7,7 @@ Una implementación completa de una aplicación cliente-servidor que expone una 
 
 ---
 
-## ✨ Características Principales
+## Características Principales
 
 *   **API RESTful:** Backend construido con Flask que sigue los principios REST.
 *   **Autenticación Segura:**
@@ -17,7 +17,7 @@ Una implementación completa de una aplicación cliente-servidor que expone una 
 *   **Cliente Interactivo:** Aplicación de consola en Python para interactuar con la API de forma sencilla.
 *   **Documentación Completa:** Página de documentación detallada alojada en GitHub Pages.
 
-## 🛠️ Tecnologías Utilizadas
+## Tecnologías Utilizadas
 
 ![Python](https://img.shields.io/badge/Python-3.10+-blue?style=for-the-badge&logo=python&logoColor=white)
 ![Flask](https://img.shields.io/badge/Flask-2.0-black?style=for-the-badge&logo=flask&logoColor=white)
@@ -25,7 +25,7 @@ Una implementación completa de una aplicación cliente-servidor que expone una 
 ![SQLite](https://img.shields.io/badge/SQLite-3-blue?style=for-the-badge&logo=sqlite&logoColor=white)
 ![Requests](https://img.shields.io/badge/Requests-2.28-brightgreen?style=for-the-badge)
 
-## 🚀 Instalación y ejecución
+## Instalación y ejecución
 
 Sigue estos pasos para configurar y ejecutar el proyecto en tu entorno local.
 
@@ -74,7 +74,7 @@ Sigue estos pasos para configurar y ejecutar el proyecto en tu entorno local.
 
 4.  **¡Listo!** Sigue las instrucciones que aparecen en la consola del cliente para registrarte, iniciar sesión y gestionar tus tareas.
 
-## 📂 Estructura del Proyecto
+##  Estructura del Proyecto
 ```bash
 sistema-gestion-tareas/
 ├── docs/
